@@ -23,13 +23,14 @@ nocolor_parts=("${arr_parts[Space]}" "${arr_parts[Newline]}")
 
 parts_choice () {
   local __resultvar=$1 
-  select parts in "${!arr_parts[@]}"
+  select parts in "${!arr_parts[@]}" "Done"
   do
 	[[ " ${!arr_parts[@]} " =~ " $parts " ]] \
 	&& { 
 	echo -e "hai scelto $parts, va bene?";
 	yes_no && { eval $__resultvar="'${arr_parts[$parts]}'" && break; }; 
-	}
+	} \
+	|| [ "$parts" == "Done" ] && return 1;
   done
 }
 

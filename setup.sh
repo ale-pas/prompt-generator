@@ -28,7 +28,7 @@ NEW_PS1=""
 echo -e "Seleziona cosa vuoi aggiungere al tuo prompt:\n"
 while true
 do
-  parts_choice part
+  parts_choice part || break
   if [[ ! ${nocolor_parts[@]} =~ "$part" ]] 
   then
 	color_choice col
