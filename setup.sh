@@ -38,11 +38,11 @@ do
 	NEW_PS1+="$part"
   fi
   echo -e "Questo è il tuo nuovo prompt:"
-  echo "$(export PS1=$NEW_PS1; echo exit | sh -i 2>&1)" 
+  echo "${NEW_PS1@P}" 
 done
 [[ $NEW_PS1 == "" ]] && { echo -e "Attenzione il prompt è vuoto!\nVuoi proseguire?"; yes_no|| exit 1; }
 
-echo "export PS1=\'$NEW_PS1\' " > ~/.prompt
+echo "export PS1='$NEW_PS1' " > ~/.prompt
 if ! grep -q "[ -f ~/.prompt ] &&  . ~/.prompt" ~/.bash_profile
 then
   echo "[ -f ~/.prompt ] &&  . ~/.prompt" >> ~/.bash_profile
