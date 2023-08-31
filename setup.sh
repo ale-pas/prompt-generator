@@ -25,9 +25,10 @@ do
 done
 
 NEW_PS1=""
-echo -e "Seleziona cosa vuoi aggiungere al tuo prompt:\n"
+# echo -e "Seleziona cosa vuoi aggiungere al tuo prompt:\n"
 while true
 do
+  echo -e "Seleziona cosa vuoi aggiungere al tuo prompt:\n"
   parts_choice part || break
   if [[ ! ${nocolor_parts[@]} =~ "$part" ]] 
   then
@@ -36,14 +37,12 @@ do
   else
 	NEW_PS1+="$part"
   fi
-  echo -e "Questo è il tuo nuovo prompt:\n$NEW_PS1"
-  echo "Vuoi aggiungere altro al prompt?"
-  yes_no || break;
-
+  echo -e "Questo è il tuo nuovo prompt:"
+  echo "$(export PS1=$NEW_PS1; echo exit | sh -i 2>&1)" 
 done
 [[ $NEW_PS1 == "" ]] && { echo -e "Attenzione il prompt è vuoto!\nVuoi proseguire?"; yes_no|| exit 1; }
 
-echo "export PS1=\"$NEW_PS1\" " > ~/.prompt
+echo "export PS1=\'$NEW_PS1\' " > ~/.prompt
 if ! grep -q "[ -f ~/.prompt ] &&  . ~/.prompt" ~/.bash_profile
 then
   echo "[ -f ~/.prompt ] &&  . ~/.prompt" >> ~/.bash_profile
