@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 resolve_dir () {
   SOURCE=${BASH_SOURCE[0]}
@@ -42,7 +42,7 @@ do
 
 done
 
-echo "export PS1=\"$NEW_PS1\" " > ~/.prompt
+echo "export PS1=\'$NEW_PS1\' " > ~/.prompt
 if ! grep -q "[ -f ~/.prompt ] &&  . ~/.prompt" ~/.bash_profile
 then
   echo "[ -f ~/.prompt ] &&  . ~/.prompt" >> ~/.bash_profile
